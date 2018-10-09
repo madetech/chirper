@@ -1,3 +1,4 @@
+require 'pry'
 require_relative '../lib/loader.rb'
 
 RSpec.configure do |config|
@@ -9,4 +10,8 @@ RSpec.configure do |config|
   end
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.order = :random
+
+  RSpec.configure do |c|
+    c.filter_run_when_matching :focus
+  end
 end
