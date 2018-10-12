@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Chirper::UseCase::ViewChirps
   def initialize(chirp_gateway:)
     @chirp_gateway = chirp_gateway
@@ -6,7 +8,8 @@ class Chirper::UseCase::ViewChirps
   def execute
     @chirp_gateway.all.map do |chirp|
       {
-        username: chirp.username, 
+        id: chirp.id,
+        username: chirp.username,
         body: chirp.body
       }
     end

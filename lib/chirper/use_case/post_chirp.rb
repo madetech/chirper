@@ -7,8 +7,8 @@ class Chirper::UseCase::PostChirp
     chirp = Chirper::Domain::Chirp.new
     chirp.username = username
     chirp.body = body
-    @chirp_gateway.save(chirp)
+    created_id = @chirp_gateway.save(chirp)
 
-    {}
+    { id: created_id }
   end
 end

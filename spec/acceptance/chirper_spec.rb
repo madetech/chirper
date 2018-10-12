@@ -18,7 +18,8 @@ describe "Creating dem chirps" do
     create_new_chirps.execute(username: 'Test Two', body: 'All dogs are good dogs.')
 
     chirps = view_chirps.execute
-    expect(chirps[0]).to eq({username: 'Test One', body: 'I just want to pet all the cats.'})
-    expect(chirps[1]).to eq({username: 'Test Two', body: 'All dogs are good dogs.'})
+
+    expect(chirps[0]).to eq({id: 0, username: 'Test One', body: 'I just want to pet all the cats.'})
+    expect(chirps[1]).to eq({id: 1, username: 'Test Two', body: 'All dogs are good dogs.'})
   end
 end

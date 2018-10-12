@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Chirper::Gateway::FileChirp do
   let(:gateway) { described_class.new(file_path: file_path) }
 
@@ -9,13 +11,13 @@ describe Chirper::Gateway::FileChirp do
     File.delete(file_path)
   end
 
-  context 'A single chirp' do 
+  context 'A single chirp' do
     context 'Example one' do
       let(:file_path) { '/tmp/cats.json' }
 
       it 'Saves a new chirp' do
         chirp = Chirper::Domain::Chirp.new
-        chirp.username = 'One' 
+        chirp.username = 'One'
         chirp.body = 'Meow'
 
         gateway.save(chirp)
@@ -25,6 +27,18 @@ describe Chirper::Gateway::FileChirp do
         expect(chirps.first.username).to eq('One')
         expect(chirps.first.body).to eq('Meow')
       end
+
+      it 'Returns the chirp ID' do
+        chirp = Chirper::Domain::Chirp.new
+        chirp.username = 'One'
+        chirp.body = 'Meow'
+
+        created_id = gateway.save(chirp)
+
+        chirp = gateway.all.first
+
+        expect(chirp.id).to eq(created_id)
+      end
     end
 
     context 'Example two' do
@@ -32,7 +46,7 @@ describe Chirper::Gateway::FileChirp do
 
       it 'Saves a new chirp' do
         chirp = Chirper::Domain::Chirp.new
-        chirp.username = 'Two' 
+        chirp.username = 'Two'
         chirp.body = 'Woof'
 
         gateway.save(chirp)
@@ -42,6 +56,18 @@ describe Chirper::Gateway::FileChirp do
         expect(chirps.first.username).to eq('Two')
         expect(chirps.first.body).to eq('Woof')
       end
+
+      it 'Returns the chirp id' do
+        chirp = Chirper::Domain::Chirp.new
+        chirp.username = 'Two'
+        chirp.body = 'Woof'
+
+        chirp_id = gateway.save(chirp)
+
+        chirp = gateway.all.first
+
+        expect(chirp.id).to eq(chirp_id)
+      end
     end
   end
 
@@ -50,21 +76,23 @@ describe Chirper::Gateway::FileChirp do
 
     it 'Saves new chirps' do
       chirp_one = Chirper::Domain::Chirp.new
-      chirp_one.username = 'Cats4lyf' 
+      chirp_one.username = 'Cats4lyf'
       chirp_one.body = 'I love cats'
 
       chirp_two = Chirper::Domain::Chirp.new
-      chirp_two.username = 'Dogs4eva' 
+      chirp_two.username = 'Dogs4eva'
       chirp_two.body = 'All dogs are the best dogs'
 
-      gateway.save(chirp_one)
-      gateway.save(chirp_two)
+      chirp_one_id = gateway.save(chirp_one)
+      chirp_two_id = gateway.save(chirp_two)
 
       chirps = gateway.all
 
+      expect(chirps[0].id).to eq(chirp_one_id)
       expect(chirps[0].username).to eq('Cats4lyf')
       expect(chirps[0].body).to eq('I love cats')
 
+      expect(chirps[1].id).to eq(chirp_two_id)
       expect(chirps[1].username).to eq('Dogs4eva')
       expect(chirps[1].body).to eq('All dogs are the best dogs')
     end
