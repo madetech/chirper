@@ -6,10 +6,13 @@ A super simple file based "Popular Microblogging Website" clone
 
 - **get** `/timeline`
   - Returns all the Chirps
-  - Example response: `[{username: 'Foo', body: 'Bar'}]`
+  - Example response: `[{id: 1, username: 'Foo', body: 'Bar', favourites: 10}]`
 - **post** `/create-chirp`
   - Creates a new Chirp
   - Example request: `{username: 'Foo', body: 'Bar'}`
+- **favourite** `/favourite`
+  - Favourites a chirp
+  - Example request: `{id: 10}`
 
 ## Developing Chirper
 
