@@ -41,6 +41,18 @@ module DeliveryMechanism
       )
     end
 
+    post '/favourite' do
+      use_case = Chirper::UseCase::FavouriteChirp.new(
+        chirp_gateway: chirp_gateway
+      )
+
+      request_body = JSON.parse(request.body.read.to_s)
+
+      use_case.execute(
+        id: request_body['id']
+      )
+    end
+
     private
 
     def chirp_gateway
