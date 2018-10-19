@@ -16,6 +16,8 @@ module DeliveryMechanism
 
     before do
       create_chirp_file unless chirp_file_exists?
+
+      content_type 'application/json'
     end
 
     get '/timeline' do
@@ -39,6 +41,8 @@ module DeliveryMechanism
         username: request_body['username'],
         body: request_body['body']
       )
+
+      {}.to_json
     end
 
     post '/favourite' do
@@ -51,6 +55,8 @@ module DeliveryMechanism
       use_case.execute(
         id: request_body['id']
       )
+
+      {}.to_json
     end
 
     private

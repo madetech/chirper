@@ -33,6 +33,10 @@ describe 'Creating a new chirp' do
       expect(last_response.status).to eq(200)
     end
 
+    it 'Returns an empty json object' do
+      expect(JSON.parse(last_response.body)).to eq({})
+    end
+
     it 'Creates the gateway with the correct file path' do
       expect(file_chirp_spy).to have_received(:new).with(file_path: '/tmp/meow.json')
     end
@@ -62,6 +66,10 @@ describe 'Creating a new chirp' do
 
     it 'returns a 200' do
       expect(last_response.status).to eq(200)
+    end
+
+    it 'Returns an empty json object' do
+      expect(JSON.parse(last_response.body)).to eq({})
     end
 
     it 'Creates the gateway with the correct file path' do

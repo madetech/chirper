@@ -16,9 +16,9 @@ class Seeds
       chirp_gateway: chirp_gateway
     )
 
-    if timeline.execute.empty?
-      post_chirp.execute(username: 'Cats4Lyf', body: 'Cats are great')
-      post_chirp.execute(username: 'Dogs4Eva', body: 'All dogs are good dogs')
-    end
+    return unless timeline.execute.empty?
+
+    post_chirp.execute(username: 'Cats4Lyf', body: 'Cats are great')
+    post_chirp.execute(username: 'Dogs4Eva', body: 'All dogs are good dogs')
   end
 end
