@@ -36,12 +36,16 @@ The chirp file will be prepopulated with the following Chirps:
 ```javascript
 [
   {
+    "id": 0,
+    "username": "Cats4Lyf",
     "body": "Cats are great",
-    "username": "Cats4Lyf"
+    "favourites": 0
   },
   {
+    "id": 1,
+    "username": "Dogs4Eva",
     "body": "All dogs are good dogs",
-    "username": "Dogs4Eva"
+    "favourites": 0
   }
 ]
 ```
