@@ -10,6 +10,7 @@ describe Chirper::UseCase::ViewChirps do
         c.id = 1
         c.username = 'One'
         c.body = 'Cat'
+        c.favourites = 10
       end
 
       [chirp]
@@ -27,6 +28,7 @@ describe Chirper::UseCase::ViewChirps do
       expect(response[0][:id]).to eq(1)
       expect(response[0][:username]).to eq('One')
       expect(response[0][:body]).to eq('Cat')
+      expect(response[0][:favourites]).to eq(10)
     end
   end
 
@@ -36,12 +38,14 @@ describe Chirper::UseCase::ViewChirps do
         c.id = 2
         c.username = 'Two'
         c.body = 'Dog'
+        c.favourites = 15
       end
 
       chirp_two = Chirper::Domain::Chirp.new.tap do |c|
         c.id = 3
         c.username = 'Three'
         c.body = 'Quack'
+        c.favourites = 20
       end
 
       [chirp_one, chirp_two]
@@ -59,10 +63,12 @@ describe Chirper::UseCase::ViewChirps do
       expect(response[0][:id]).to eq(2)
       expect(response[0][:username]).to eq('Two')
       expect(response[0][:body]).to eq('Dog')
+      expect(response[0][:favourites]).to eq(15)
 
       expect(response[1][:id]).to eq(3)
       expect(response[1][:username]).to eq('Three')
       expect(response[1][:body]).to eq('Quack')
+      expect(response[1][:favourites]).to eq(20)
     end
   end
 end

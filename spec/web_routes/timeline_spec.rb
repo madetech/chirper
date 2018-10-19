@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require_relative './delivery_mechanism_spec_helper'
 
 describe 'Getting the timeline' do
   let(:view_chirps_execute_spy) { spy(execute: chirps) }
   let(:view_chirps_spy) { spy(new: view_chirps_execute_spy) }
-  let(:file_chirp_spy) { spy(new: file_chirp_dummy)}
+  let(:file_chirp_spy) { spy(new: file_chirp_dummy) }
 
   before do
     stub_const(
@@ -19,7 +21,7 @@ describe 'Getting the timeline' do
 
   context 'Example one' do
     let(:file_chirp_dummy) { 'This is a dummy' }
-    let(:chirps) do 
+    let(:chirps) do
       [
         {
           username: 'Cats4Lyf', body: 'Cats Rule'

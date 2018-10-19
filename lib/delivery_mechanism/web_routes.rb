@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 
 $stdout.sync = true
 
 module DeliveryMechanism
   class WebRoutes < Sinatra::Base
-    def create_chirp_file 
+    def create_chirp_file
       File.open(ENV['CHIRP_FILE_PATH'], 'w') {}
     end
 
@@ -14,7 +16,6 @@ module DeliveryMechanism
 
     before do
       create_chirp_file unless chirp_file_exists?
-
     end
 
     get '/timeline' do
@@ -35,7 +36,7 @@ module DeliveryMechanism
       request_body = JSON.parse(request.body.read.to_s)
 
       use_case.execute(
-        username: request_body['username'], 
+        username: request_body['username'],
         body: request_body['body']
       )
     end

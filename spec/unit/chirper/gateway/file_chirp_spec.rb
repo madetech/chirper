@@ -97,4 +97,44 @@ describe Chirper::Gateway::FileChirp do
       expect(chirps[1].body).to eq('All dogs are the best dogs')
     end
   end
+
+  context 'Favouriting a chirp' do
+    let(:file_path) { '/tmp/dogs.json' }
+    before { chirp_id }
+
+    context 'Example one' do
+      let(:chirp_id) do
+        chirp = Chirper::Domain::Chirp.new
+        chirp.username = 'One'
+        chirp.body = 'Woof'
+
+        gateway.save(chirp)
+      end
+
+      it 'Increases the favourite count' do
+        gateway.favourite(id: chirp_id)
+        chirp = gateway.all.first
+
+        expect(chirp.favourites).to eq(1)
+      end
+    end
+
+    context 'Example two' do
+      let(:chirp_id) do
+        chirp = Chirper::Domain::Chirp.new
+        chirp.username = 'One'
+        chirp.body = 'Woof'
+
+        gateway.save(chirp)
+      end
+
+      it 'Increases the favourite count' do
+        gateway.favourite(id: chirp_id)
+        gateway.favourite(id: chirp_id)
+        chirp = gateway.all.first
+
+        expect(chirp.favourites).to eq(2)
+      end
+    end
+  end
 end

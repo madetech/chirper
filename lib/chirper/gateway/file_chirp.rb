@@ -25,7 +25,21 @@ class Chirper::Gateway::FileChirp
         c.id = chirp['id']
         c.username = chirp['username']
         c.body = chirp['body']
+        c.favourites = chirp['favourites']
       end
+    end
+  end
+
+  def favourite(id:)
+    chirps = saved_chirps
+
+    chirps.each do |chirp|
+      next unless chirp['id'] == id
+      chirp['favourites'] += 1
+    end
+
+    File.open(@file_path, 'w') do |f|
+      f.write(chirps.to_json)
     end
   end
 
@@ -46,7 +60,8 @@ class Chirper::Gateway::FileChirp
     {
       id: chirp.id,
       username: chirp.username,
-      body: chirp.body
+      body: chirp.body,
+      favourites: chirp.favourites || 0
     }
   end
 end

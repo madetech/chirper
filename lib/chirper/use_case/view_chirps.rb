@@ -10,7 +10,8 @@ class Chirper::UseCase::ViewChirps
       {
         id: chirp.id,
         username: chirp.username,
-        body: chirp.body
+        body: chirp.body,
+        favourites: chirp.favourites
       }
     end
   end
