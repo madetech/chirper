@@ -18,6 +18,7 @@ module DeliveryMechanism
       create_chirp_file unless chirp_file_exists?
 
       content_type 'application/json'
+      headers "Access-Control-Allow-Origin" => '*'
     end
 
     get '/timeline' do
